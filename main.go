@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/podanypepa/fiber-gorm-mysql-backend/pkg/database"
+	"github.com/podanypepa/fiber-gorm-mysql-backend/pkg/model/todo"
 	"github.com/podanypepa/fiber-gorm-mysql-backend/pkg/rest"
 )
 
@@ -18,7 +17,11 @@ func init() {
 
 func main() {
 	database.Connect()
+	if err := database.DB.AutoMigrate(&todo.TODO{}); err != nil {
+		log.Fatal(err)
+	}
 
-	port := os.Getenv("PORT")
-	rest.Create().Listen(fmt.Sprintf(":%s", port))
+	if err := rest.Create().Listen(":8080"); err != nil {
+		log.Fatal(err)
+	}
 }
