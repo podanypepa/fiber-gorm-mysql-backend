@@ -4,6 +4,8 @@
 *.dll
 *.so
 *.dylib
+backend
+fiber-gorm-mysql-backend
 
 # Test binary, built with `go test -c`
 *.test
