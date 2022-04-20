@@ -38,7 +38,7 @@ func Update(db *gorm.DB, t *TODO) error {
 
 // Delete TODO from DB
 func Delete(db *gorm.DB, t *TODO) error {
-	return nil
+	return db.Delete(t).Error
 }
 
 // DeleteByID one TODO by ID
